@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+@import './animation.css';
+
+@theme {
+  --color-background: #fff;
+  --color-surface: #eee;
+
+  --color-primary: #0094e7;
+
+  --color-secondary: #0f2b61;
+  --color-on-secondary: #fff;
+
+  --color-text: #333;
+  --color-text-low: #808080;
+
+  --color-rating: #fce80d;
+
+  --color-positive: #00cc1b;
+  --color-negative: #cc0000;
+}
