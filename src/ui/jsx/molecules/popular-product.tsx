@@ -3,18 +3,19 @@ import { Product } from '@data/product';
 import Image from 'next/image';
 import { cn } from 'webdev';
 import Rating from '../atoms/rating';
-import { sanitize } from '@/lib/util/sanitize';
 
 const style = {
   container: cn(
     'w-60 relative',
-    'grid grid-rows-[repeat(ý,auto)] grid-cols-[1fr_auto]'
+    'grid grid-rows-[repeat(3,auto)_1fr_auto] grid-cols-[1fr_auto]',
+    'place-items-'
   ),
   image: cn('w-full', 'col-span-2 pb-2'),
   name: cn('col-span-2', 'text-lg font-bold text-secondary'),
   rating: cn('text-lg', 'col-span-2  my-1 mb-3'),
-  specs: cn('col-span-2', 'text-text-low'),
   novat: cn('text-positive text-lg mt-2'),
+  specs: cn('col-span-2 h-min ', 'text-text-low text-justify line-clamp-5 '),
+
 };
 
 export default function PopularProduct({ product }: { product: Product }) {
