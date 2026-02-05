@@ -12,9 +12,12 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.2.0",
+    "@tanstack/react-query": "^5.90.20",
     "dompurify": "^3.3.1",
+    "lucide-react": "^0.563.0",
     "next": "16.1.6",
     "react": "19.2.3",
+    "react-aria-components": "^1.15.0",
     "react-dom": "19.2.3",
     "react-feather": "^2.0.10",
     "webdev": "^0.0.5"
