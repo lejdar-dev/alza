@@ -3,7 +3,7 @@ import { story as Categories } from '../organisms/categories';
 import { story as Popular } from '../organisms/popular';
 import { story as Gallery } from '../organisms/gallery';
 import { cn } from 'webdev';
-import { story as TabSelector } from '../molecules/tabs';
+import { story as TabSelector } from '../molecules/tab-selector';
 
 type Props = {
   categories: ReactNode;
