@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+> [!IMPORTANT]
+> **Aplikace nestahuje živá data z https://www.alza.cz/Services/RestService.svc/v2/products**
+>
+> Tento endpoint běží na alze za cloudflare firewallem a obcházení by znamenalo několikavteřinové zpoždění pro jednoduchý požadavek. Pro jednoduchost je v souboru `src/lib/service/production/product-sw.ts` spuštěn mockupový server, který zachycuje požadavky na tuto adresu a vrací předem stažená data, staticky uložená ve stejném adresáři.
 
-## Getting Started
+<br/>
 
-First, run the development server:
+## Vercel
+
+Aplikace běží na adrese https://alza-nu.vercel.app.
+
+<br/>
+
+##  Nástroje
+
+#### Spuštění lokálního serveru
+Aplikace bude dostupná na http://localhost:3000
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm dev 
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Build a spuštění aplikace
+Aplikace bude dostupná na http://localhost:3000
+```bash
+pnpm build
+pnpm start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Storybook
+Nástroj pro vývoj a testování React komponent.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm storybook
+```
 
-## Learn More
+<br/>
 
-To learn more about Next.js, take a look at the following resources:
+## Git
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Větve
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `dev` slouží k vývoji a běží na mockupových datech 
+- `preview` slouží k testování před zveřejněním nové verze a běží na produkčních datech
+- `main` odpovídá verzi na adrese https://alza-nu.vercel.app
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> [!NOTE]
+> Při spuštění serveri `npm dev` nebo buildu `npm build` se spustí generátor souboru `tsconfig.gen.json`, který zajišťuje, že každá verze apliakce používá správné rozhraní (mockup / production). Pro testování produkčního rozhraní ve větvi `dev` stačí přepsat `.../mock/services.mock.ts` na `.../production/services.production.ts` v generovaném `tsconfig.gen.json`. (Soubor není verzovaný)
+
+<br/>
+<br/>
+<br/>
+
+[![HitCount](https://hits.dwyl.com/lejdar-dev/alza.svg?style=flat-square&show=unique)](http://hits.dwyl.com/lejdar-dev/alza)
