@@ -1,70 +1,90 @@
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { CSSProperties, useCallback, useState } from 'react';
+'use client';
+import { twUnit, useFitItems } from '@/lib/util/dimensions';
+import { useInterval } from '@/lib/util/time';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, {
+  CSSProperties,
+  ReactNode,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import { cn, generate } from 'webdev';
 
 type Props = {
-  renderItem: (index: number) => React.ReactNode;
-  maxItemsVisible: number;
   itemWidth: number;
   itemGap: number;
+  children: ReactNode[];
 };
 
 const style = {
-  container: cn('relative max-w-full w-auto','flex justify-center'),
-  items: cn(
-    'max-w-full',
-    'grid grid-flow-col',
-    'grid-cols-[repeat(auto-fit,_calc(var(--item)_+_var(--item-gap)))] auto-cols-[0]',
-    'justify-center'
-  ),
-  item: cn('w-full flex justify-center max-w-full overflow-hidden'),
+  container: cn(' w-full flex justify-center'),
 
-  arrow: cn(`w-5 min-w-5`),
+  items: cn(
+    'max-w-full flex-1',
+    'grid grid-flow-col',
+    'grid-cols-[0_repeat(auto-fit,calc(var(--item)+var(--item-gap)))] auto-cols-[0]',
+    'justify-center',
+    'data-[measured=true]:flex',
+    '*:transition-all *:duration-300',
+    'overflow-hidden'
+  ),
+  item: cn(
+    'flex justify-center',
+    'w-[calc(var(--item)_+_var(--item-gap))]',
+    'max-w-full overflow-hidden',
+    'data-[collapsed=true]:w-0',
+    'data-[collapsed=true]:scale-0'
+  ),
+
+  arrow: cn(`w-10 h-10 mt-8`, 'cursor-pointer select-none', 'active:scale-95'),
 };
 
 export default function Carousel(props: Props) {
-  const { renderItem, maxItemsVisible, itemGap, itemWidth } = props;
+  const { itemGap, itemWidth, children } = props;
 
   const [index, setIndex] = useState(0);
 
   const next = useCallback(() => setIndex((index) => index + 1), []);
   const previous = useCallback(() => setIndex((index) => index - 1), []);
 
-  return (
-    <div
-      className={style.container}
-      style={
-        {
-          gridAutoColumns: '0',
-          '--item': `${itemWidth * 0.25}rem`,
-          '--item-gap': `${itemGap * 0.25}rem`,
-        } as CSSProperties
-      }
-    >
-      <ArrowLeft className={style.arrow} onClick={previous} />
+  useInterval(7000, next);
 
-      <div className={style.items}>
-        {generate(maxItemsVisible, (delta) => delta - 1).map((delta) => (
-          <div className={style.item} key={index + delta}>
-            {renderItem(index + delta)}
+  const items = React.Children.toArray(children);
+
+  const container = useRef<HTMLDivElement>(null);
+
+  const { itemCount, hasBeenMeasured } = useFitItems(
+    container,
+    twUnit(itemWidth + itemGap)
+  );
+
+  const variables = {
+    '--item': `${itemWidth * 0.25}rem`,
+    '--item-gap': `${itemGap * 0.25}rem`,
+  } as CSSProperties;
+
+  return (
+    <div className={style.container} style={variables}>
+      <ChevronLeft className={style.arrow} onClick={previous} />
+      <div
+        className={style.items}
+        ref={container}
+        data-measured={hasBeenMeasured}
+      >
+        {generate(children.length + 2, (delta) => delta - 1).map((delta) => (
+          <div
+            className={style.item}
+            key={`${'measuring:'.repeat(+!hasBeenMeasured)}:${index + delta}`}
+            data-collapsed={
+              hasBeenMeasured && (delta < 0 || delta >= Math.max(itemCount, 1))
+            }
+          >
+            {items[(items.length + (index + delta)) % items.length]}
           </div>
         ))}
       </div>
-
-      <ArrowRight className={style.arrow} onClick={next} />
+      <ChevronRight className={style.arrow} onClick={next} />
     </div>
   );
 }
-
-export const story = () => (
-  <Carousel
-    itemWidth={20}
-    itemGap={4}
-    renderItem={(index: number) => (
-      <div className="min-w-20 w-20 text-center h-20 bg-surface">
-        Item n. {index}
-      </div>
-    )}
-    maxItemsVisible={10}
-  />
-);
