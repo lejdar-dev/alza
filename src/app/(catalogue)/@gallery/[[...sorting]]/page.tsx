@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { isValidTab, tabs } from '../../tabs';
 
 export function generateStaticParams() {
-  return tabs.map((tab) => ({ sorting: [tab.id] }));
+  return [...tabs.map((tab) => ({ sorting: [tab.id] })), { sorting: [] }];
 }
 
 export default async function GalleryPage({
