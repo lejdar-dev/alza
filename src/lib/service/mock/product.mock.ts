@@ -1,5 +1,6 @@
+import { Network, Server, Validation } from '@/lib/data/reason';
 import bindAll from '@/lib/util/bind-all';
-import { generate } from '@lejdar/webdev';
+import { generate, Result } from '@lejdar/webdev';
 import { Category, Product } from '../../data/product';
 import Mock from '../../util/mock';
 import { type Repository } from '../brain';
@@ -9,23 +10,33 @@ export class ProudctMockService implements Repository<'product'> {
     bindAll(this);
   }
 
-  async fetchProducts(): Promise<Product[]> {
-    return generate(
+  async fetchProducts(): Promise<
+    Result<Product[], Network | Validation | Server>
+  > {
+    const products = generate(
       this.mock.faker.number.int({ min: 5, max: 50 }),
-      this.mock.makeUpProduct
+      () => this.mock.makeUpProduct()
     );
+
+    return Result.ok(products);
   }
-  async fetchCategories(): Promise<Category[]> {
-    return generate(
+  async fetchCategories(): Promise<Result.Ok<Category[]>> {
+    const categories = generate(
       this.mock.faker.number.int({ min: 5, max: 15 }),
       this.mock.makeUpCategory
     );
+
+    return Result.ok(categories);
   }
 
-  async fetchPopularProducts(): Promise<Product[]> {
-    return generate(
+  async fetchPopularProducts(): Promise<
+    Result<Product[], Network | Validation | Server>
+  > {
+    const popularProducts = generate(
       this.mock.faker.number.int({ min: 5, max: 50 }),
-      this.mock.makeUpProduct
+      () => this.mock.makeUpProduct()
     );
+
+    return Result.ok(popularProducts);
   }
 }
