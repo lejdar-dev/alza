@@ -30,7 +30,7 @@ export function PopularSkeleton() {
       <PopularProductSkeleton />
       <PopularProductSkeleton />
       <PopularProductSkeleton />
-      <PopularPritemCount itemCountoductSkeleton />
+      <PopularProductSkeleton />
       <PopularProductSkeleton />
     </Carousel>
   );
