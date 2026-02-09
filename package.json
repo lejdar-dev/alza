@@ -3,24 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "setup": "ts-node tool/setup-serivces.mts",
+    "dev": "$npm_execpath run setup && next dev",
+    "build": "$npm_execpath run setup && next build",
+    "start": "$npm_execpath run setup && next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
     "@faker-js/faker": "^10.2.0",
+    "@plaiceholder/next": "^3.0.0",
     "@tanstack/react-query": "^5.90.20",
-    "dompurify": "^3.3.1",
+    "isomorphic-dompurify": "^2.35.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.6",
+    "plaiceholder": "^3.0.0",
     "react": "19.2.3",
     "react-aria-components": "^1.15.0",
     "react-dom": "19.2.3",
     "react-feather": "^2.0.10",
-    "webdev": "^0.0.5"
+    "resize-observer-polyfill": "^1.5.1",
+    "webdev": "^0.0.5",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@storybook/nextjs-vite": "^10.2.3",
@@ -30,10 +35,24 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "eslint-plugin-compat": "^6.1.0",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-storybook": "^10.2.3",
+    "msw": "^2.12.9",
     "storybook": "^10.2.3",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5",
     "vite": "^7.3.1"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "> 1%"
+  ],
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
