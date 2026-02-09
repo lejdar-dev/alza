@@ -1,8 +1,8 @@
-import { generate } from 'webdev';
-import { type Repository } from '../brain';
+import bindAll from '@/lib/util/bind-all';
+import { generate } from '@lejdar/webdev';
 import { Category, Product } from '../../data/product';
 import Mock from '../../util/mock';
-import bindAll from '@/lib/util/bind-all';
+import { type Repository } from '../brain';
 
 export class ProudctMockService implements Repository<'product'> {
   constructor(private mock: Mock) {

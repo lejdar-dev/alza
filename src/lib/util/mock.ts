@@ -1,5 +1,5 @@
 import { Faker, base, cs_CZ, de, de_AT, en } from '@faker-js/faker';
-import { generate } from 'webdev';
+import { generate } from '@lejdar/webdev';
 import { Category, Product } from '../data/product';
 import { formatPrice } from './format';
 

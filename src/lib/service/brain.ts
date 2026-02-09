@@ -1,4 +1,4 @@
-import { Get, Result, type Paths } from 'webdev';
+import { Get, Result, type Paths } from '@lejdar/webdev';
 import { Product, type Category } from '../data/product';
 import { Network, Server, Validation } from '../data/reason';
 

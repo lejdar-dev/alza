@@ -1,8 +1,8 @@
 'use client';
 
+import { cn } from '@lejdar/webdev';
 import Image, { ImageProps } from 'next/image';
 import { useState } from 'react';
-import { cn } from 'webdev';
 
 type Props = ImageProps & {
   blurDataUrl: string;

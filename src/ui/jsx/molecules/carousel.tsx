@@ -1,15 +1,15 @@
 'use client';
 import { twUnit, useFitItems } from '@/lib/util/dimensions';
 import { useInterval } from '@/lib/util/time';
+import { cn, generate } from '@lejdar/webdev';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React, {
-  CSSProperties,
-  ReactNode,
-  useCallback,
-  useRef,
-  useState,
+    CSSProperties,
+    ReactNode,
+    useCallback,
+    useRef,
+    useState,
 } from 'react';
-import { cn, generate } from 'webdev';
 
 type Props = {
   itemWidth: number;
