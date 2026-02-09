@@ -8,7 +8,7 @@ import BuyMenu from './buy-menu';
 
 const style = {
   container: cn(
-    'mx-w-full w-60 h-132 relative',
+    'mx-w-full w-full relative',
     'grid grid-rows-[auto_repeat(4,auto)_1fr] grid-cols-[1fr_auto]'
   ),
   image: cn(
@@ -106,9 +106,11 @@ export const story = {
     const { mock } = await import('@/lib/util/mock');
 
     return (
-      <GalleryProduct
-        product={mock.makeUpProduct({ extraLongName, extraLongSpecs })}
-      />
+      <div className={'w-60'}>
+        <GalleryProduct
+          product={mock.makeUpProduct({ extraLongName, extraLongSpecs })}
+        />
+      </div>
     );
   },
 };

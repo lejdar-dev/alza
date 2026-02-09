@@ -5,7 +5,9 @@ import GalleryProduct, {
 } from '../molecules/gallery-product';
 
 const style = cn(
-  'grid grid-cols-[repeat(auto-fit,15rem)] gap-12 justify-center max-w-full '
+  'grid grid-cols-[repeat(auto-fit,15rem)] gap-12 justify-center max-w-full',
+  
+  'max-sm:flex max-sm:flex-col max-sm:gap-24 max-sm:*:max-w-90 max-sm:items-center max-sm:px-4'
 );
 
 export default async function Gallery() {

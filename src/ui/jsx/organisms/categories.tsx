@@ -5,7 +5,7 @@ import Category from '../atoms/category';
 const style = cn(
   `grid gap-3`,
 
-  'max-sm:grid-cols-[repeat(2,12rem)] max-sm:justify-center ',
+  'max-sm:grid-cols-[1fr_1fr] ',
   'min-sm:grid-cols-[repeat(auto-fit,12rem)]',
 
   'max-sm:text-sm'

@@ -16,7 +16,8 @@ const style = {
   layout: cn(
     'w-340 max-w-full',
     'flex flex-col mx-auto',
-    'pt-24 pb-[33vh] px-[5vw] '
+    'pt-24 pb-[33vh] px-[5vw] ',
+    'max-sm:pt-8'
   ),
   title: cn('text-2xl font-bold  '),
   popular: cn('text-xl font-medium'),
