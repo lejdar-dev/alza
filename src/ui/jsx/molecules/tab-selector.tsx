@@ -1,30 +1,46 @@
 'use client';
 
 import { ClassNameProp, cn } from '@lejdar/webdev';
+import { Book, Briefcase, Contact, Heart, HelpCircle, Home, Info, Server } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import type { CSSProperties } from 'react';
 
 type Props = {
-  tabs: readonly { label: string; route: string; id: string }[];
+  tabs: {
+    label: string;
+    routes: string[];
+    id: string;
+    icon: React.ReactNode;
+  }[];
 } & ClassNameProp;
 
 const style = {
   container: cn(
-    'w-full overflow-x-auto',
+    'w-full max-w-full ',
     'flex gap-4',
     'text-lg',
-    'border-b-1 border-text/10',
-    'overflow-hidden hover:overflow-auto'
+    'min-sm:border-b-1 border-text/10',
+    // Responsive
+    'max-md:justify-center',
+    'max-md:text-sm',
+    'max-sm:grid max-sm:grid-cols-[1fr_1fr]',
+    'max-sm:gap-2'
   ),
   tab: cn(
-    'w-max',
+    'flex items-center gap-2',
     'cursor-pointer',
     'text-center whitespace-nowrap',
-    'py-4 px-6 row-1',
+    'py-4 px-6',
     'data-[selected=true]:font-bold data-[selected=true]:text-secondary ',
-    'transition-all'
+    'transition-all',
+
+    // Responsive
+    'max-sm:border-surface max-sm:border-1 max-sm:rounded-sm',
+    'max-sm:py-2 max-sm:px-6',
+    'border-secondary min-sm:data-[selected=true]:border-b-1 max-sm:data-[selected=true]:border-secondary max-sm:data-[selected=true]:bg-secondary/5'
   ),
+
+  icon: cn('hidden max-sm:block', '*:w-4 *:h-4 text-text-low'),
 };
 
 export default function TabSelector(props: Props) {
@@ -33,18 +49,8 @@ export default function TabSelector(props: Props) {
   const pathname = usePathname() ?? '/';
 
   return (
-    <div
-      className={cn(style.container, className)}
-      style={
-        {
-          '--tab-count': tabs.length,
-          '--selected':
-            1 +
-            tabs.indexOf(tabs.find(({ route }) => pathname.startsWith(route))!),
-        } as CSSProperties
-      }
-    >
-      {tabs.map(({ label, route, id }) => (
+    <div className={cn(style.container, className)}>
+      {tabs.map(({ label, routes, id, icon }) => (
         <Link
           onClick={({ currentTarget }) =>
             currentTarget.scrollIntoView({
@@ -53,11 +59,12 @@ export default function TabSelector(props: Props) {
               behavior: 'smooth',
             })
           }
-          href={route}
+          href={routes[0]}
           key={id}
           className={style.tab}
-          data-selected={pathname.startsWith(route)}
+          data-selected={routes.some((route) => pathname === route)}
         >
+          <span className={style.icon}>{icon}</span>
           {label}
         </Link>
       ))}
@@ -68,16 +75,15 @@ export default function TabSelector(props: Props) {
 export const story = () => (
   <TabSelector
     tabs={[
-      { label: 'Home', route: '/', id: 'home' },
-      { label: 'About', route: '/about', id: 'about' },
-      { label: 'Contact', route: '/contact', id: 'contact' },
-      { label: 'Blog', route: '/blog', id: 'blog' },
-      { label: 'Portfolio', route: '/portfolio', id: 'portfolio' },
-      { label: 'Services', route: '/services', id: 'services' },
-      { label: 'Testimonials', route: '/testimonials', id: 'testimonials' },
-      { label: 'FAQ', route: '/faq', id: 'faq' },
-      { label: 'Contact', route: '/contact', id: 'contact' },
-      { label: 'Contact', route: '/contact', id: 'contact' },
+      { label: 'Home', routes: ['/'], id: 'home', icon: <Home /> },
+      { label: 'About', routes: ['/about'], id: 'about', icon: <Info/> },
+      { label: 'Contact', routes: ['/contact'], id: 'contact', icon: <Contact/> },
+      { label: 'Blog', routes: ['/blog'], id: 'blog', icon: <Book/> },
+      { label: 'Portfolio', routes: ['/portfolio'], id: 'portfolio', icon: <Briefcase/> },
+      { label: 'Services', routes: ['/services'], id: 'services', icon: <Server/> },
+      { label: 'Testimonials', routes: ['/testimonials'], id: 'testimonials', icon: <Heart /> },
+      { label: 'FAQ', routes: ['/faq'], id: 'faq', icon: <HelpCircle /> },
+      { label: 'Contact', routes: ['/contact'], id: 'contact', icon: <Contact/> },
     ]}
   />
 );

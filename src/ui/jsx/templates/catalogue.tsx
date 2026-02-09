@@ -35,7 +35,7 @@ export default function Catalogue(props: Props) {
       <h2 className={style.popular}>Nejprodávanější</h2>
       <span aria-hidden className="pb-8" />
       {popular}
-      <span aria-hidden className="pb-24" />
+      <span aria-hidden className="pb-12" />
 
       {tabs}
       <span aria-hidden className="pb-8" />
