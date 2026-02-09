@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup": "ts-node tool/setup-serivces.mts",
+    "setup": "tsx tool/setup-serivces.mts",
     "dev": "$npm_execpath run setup && next dev",
     "build": "$npm_execpath run setup && next build",
     "start": "$npm_execpath run setup && next start",
@@ -41,7 +41,7 @@
     "msw": "^2.12.9",
     "storybook": "^10.2.3",
     "tailwindcss": "^4",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5",
     "vite": "^7.3.1"
   },
