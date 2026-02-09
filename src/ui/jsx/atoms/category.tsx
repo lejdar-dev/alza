@@ -1,6 +1,12 @@
 import { cn } from 'webdev';
 
-const style = cn(`w-40 py-2`, 'bg-surface text-center');
+const style = cn(
+  `w-full p-4 py-3`,
+  'max-w-full',
+  'text-center',
+  'bg-surface shadow-sm',
+  'select-none cursor-pointer',
+);
 
 export default function Category({ category }: { category: string }) {
   return <div className={style}>{category}</div>;
