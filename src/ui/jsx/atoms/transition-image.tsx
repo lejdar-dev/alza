@@ -11,15 +11,15 @@ type Props = ImageProps & {
 const style = {
   image: cn(
     'transition-all duration-300',
-    'opacity-0 data-[loaded=true]:opacity-100'
+    'opacity-0 data-[loaded=true]:not-group-data-[blurred=true]/image:opacity-100'
   ),
 
   overlay: cn(
     'absolute inset-0',
     'bg-contain bg-center bg-no-repeat',
     'transition-all duration-300',
-    'opacity-100 data-[loaded=true]:opacity-0',
-    'blur-md data-[loaded=true]:blur-0'
+    'opacity-100 data-[loaded=true]:not-group-data-[blurred=true]/image:opacity-0',
+    'blur-md data-[loaded=true]:not-group-data-[blurred=true]/image:blur-0'
   ),
 };
 

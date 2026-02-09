@@ -4,11 +4,11 @@ import { useInterval } from '@/lib/util/time';
 import { cn, generate } from '@lejdar/webdev';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React, {
-    CSSProperties,
-    ReactNode,
-    useCallback,
-    useRef,
-    useState,
+  CSSProperties,
+  ReactNode,
+  useCallback,
+  useRef,
+  useState,
 } from 'react';
 
 type Props = {
@@ -74,7 +74,8 @@ export default function Carousel(props: Props) {
       >
         {generate(children.length + 2, (delta) => delta - 1).map((delta) => (
           <div
-            className={style.item}
+            className={cn(style.item, 'group/image')}
+            data-blurred={!hasBeenMeasured}
             key={`${'measuring:'.repeat(+!hasBeenMeasured)}:${index + delta}`}
             data-collapsed={
               hasBeenMeasured && (delta < 0 || delta >= Math.max(itemCount, 1))
