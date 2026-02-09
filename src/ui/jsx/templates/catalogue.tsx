@@ -1,9 +1,9 @@
+import { cn } from '@lejdar/webdev';
 import { ReactNode } from 'react';
-import { story as Categories } from '../organisms/categories';
-import { story as Popular } from '../organisms/popular';
-import { story as Gallery } from '../organisms/gallery';
-import { cn } from 'webdev';
 import TabSelector from '../molecules/tab-selector';
+import { story as Categories } from '../organisms/categories';
+import { story as Gallery } from '../organisms/gallery';
+import { story as Popular } from '../organisms/popular';
 
 type Props = {
   categories: ReactNode;
@@ -27,17 +27,17 @@ export default function Catalogue(props: Props) {
   return (
     <div className={style.layout}>
       <h1 className={style.title}>Notebooky</h1>
-      <span aria-hidden className='pb-8'/>
+      <span aria-hidden className="pb-8" />
       {categories}
-      <span aria-hidden className='pb-24'/>
+      <span aria-hidden className="pb-24" />
 
       <h2 className={style.popular}>Nejprodávanější</h2>
-      <span aria-hidden className='pb-8'/>
+      <span aria-hidden className="pb-8" />
       {popular}
-      <span aria-hidden className='pb-24'/>
+      <span aria-hidden className="pb-24" />
 
       {tabs}
-      <span aria-hidden className='pb-8'/>
+      <span aria-hidden className="pb-8" />
       {products}
     </div>
   );

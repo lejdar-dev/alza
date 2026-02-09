@@ -1,5 +1,5 @@
 import { fetchCategories } from '@/lib/api/product.api';
-import { cn } from 'webdev';
+import { cn } from '@lejdar/webdev';
 import Category from '../atoms/category';
 
 const style = cn(

@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { CSSProperties } from 'react';
 
-import { ClassNameProp, cn } from 'webdev';
+import { ClassNameProp, cn } from '@lejdar/webdev';
 import { Menu, MenuItem, MenuPopover, MenuTrigger } from '../atoms/menu';
 
 const options = [

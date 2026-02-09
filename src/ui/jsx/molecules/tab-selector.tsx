@@ -1,9 +1,9 @@
 'use client';
 
+import { ClassNameProp, cn } from '@lejdar/webdev';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { CSSProperties } from 'react';
-import { ClassNameProp, cn } from 'webdev';
 
 type Props = {
   tabs: readonly { label: string; route: string; id: string }[];

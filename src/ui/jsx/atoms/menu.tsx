@@ -1,14 +1,14 @@
+import { ClassNameProp, cn } from '@lejdar/webdev';
 import { ReactNode } from 'react';
 import {
-  Button as AriaButton,
-  Menu as AriaMenu,
-  MenuItem as AriaMenuItem,
-  MenuItemProps as AriaMenuItemProps,
-  MenuTrigger as AriaMenuTrigger,
-  Popover as AriaPopover,
-  PopoverProps as AriaPopoverProps,
+    Button as AriaButton,
+    Menu as AriaMenu,
+    MenuItem as AriaMenuItem,
+    MenuItemProps as AriaMenuItemProps,
+    MenuTrigger as AriaMenuTrigger,
+    Popover as AriaPopover,
+    PopoverProps as AriaPopoverProps,
 } from 'react-aria-components';
-import { ClassNameProp, cn } from 'webdev';
 
 export function Menu({ children }: { children: ReactNode }) {
   return <AriaMenuTrigger>{children}</AriaMenuTrigger>;

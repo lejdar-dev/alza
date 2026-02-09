@@ -1,6 +1,6 @@
 import { sanitize } from '@/lib/util/sanitize';
 import { Product } from '@data/product';
-import { cn } from 'webdev';
+import { cn } from '@lejdar/webdev';
 import PreloadedImage from '../atoms/preloaded-image';
 import Rating from '../atoms/rating';
 import { SkeletonBox, SkeletonLine } from '../atoms/skeleton';

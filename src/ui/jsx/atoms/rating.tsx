@@ -1,4 +1,4 @@
-import { ClassNameProp, cn } from 'webdev';
+import { ClassNameProp, cn } from '@lejdar/webdev';
 
 type Props = {
   score: number;

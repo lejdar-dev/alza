@@ -1,7 +1,7 @@
 import { fetchProducts } from '@/lib/api/product.api';
-import { cn } from 'webdev';
+import { cn } from '@lejdar/webdev';
 import GalleryProduct, {
-  GalleryProductSkeleton,
+    GalleryProductSkeleton,
 } from '../molecules/gallery-product';
 
 const style = cn(

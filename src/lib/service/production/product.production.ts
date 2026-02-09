@@ -1,6 +1,6 @@
 import Reason, { Network, Server, Validation } from '@/lib/data/reason';
 import bindAll from '@/lib/util/bind-all';
-import { Result } from 'webdev';
+import { Result } from '@lejdar/webdev';
 import z from 'zod';
 import { Product } from '../../data/product';
 import { type Repository } from '../brain';
