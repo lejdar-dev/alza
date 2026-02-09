@@ -1,73 +1,83 @@
-import { CSSProperties, MouseEventHandler, useCallback, useState } from 'react';
-import { cn } from 'webdev';
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import type { CSSProperties } from 'react';
+import { ClassNameProp, cn } from 'webdev';
 
 type Props = {
-  tabs: { label: string; id: string }[];
-  onSelect: (tab: string) => void;
-  selected: string;
-};
+  tabs: readonly { label: string; route: string; id: string }[];
+} & ClassNameProp;
 
 const style = {
   container: cn(
-    'flex',
-    'relative',
+    'w-full overflow-x-auto',
+    'flex gap-4',
     'text-lg',
     'border-b-1 border-text/10',
-    'after:content-[""] after:h-[2px] after:w-24 after:bg-secondary',
-    'after:absolute after:bottom-[-1px] after:left-[calc(var(--selected)_*_6rem)] after:rounded',
-    'after:transition-all'
+    'overflow-hidden hover:overflow-auto'
   ),
   tab: cn(
+    'w-max',
     'cursor-pointer',
-    'w-24',
-    'text-center',
-    'px-2 py-2',
+    'text-center whitespace-nowrap',
+    'py-4 px-6 row-1',
     'data-[selected=true]:font-bold data-[selected=true]:text-secondary ',
     'transition-all'
   ),
 };
 
 export default function TabSelector(props: Props) {
-  const { tabs, onSelect, selected } = props;
+  const { tabs, className } = props;
 
-  const handleSelect: MouseEventHandler<HTMLElement> = useCallback(
-    ({ currentTarget }) => onSelect(currentTarget.dataset.tab as string),
-    [onSelect]
-  );
+  const pathname = usePathname() ?? '/';
+
   return (
     <div
-      className={style.container}
+      className={cn(style.container, className)}
       style={
         {
-          '--selected': tabs.findIndex((tab) => tab.id === selected),
+          '--tab-count': tabs.length,
+          '--selected':
+            1 +
+            tabs.indexOf(tabs.find(({ route }) => pathname.startsWith(route))!),
         } as CSSProperties
       }
     >
-      {tabs.map(({ label, id }) => (
-        <span
-          onClick={handleSelect}
-          data-tab={id}
-          data-selected={selected === id}
+      {tabs.map(({ label, route, id }) => (
+        <Link
+          onClick={({ currentTarget }) =>
+            currentTarget.scrollIntoView({
+              block: 'nearest',
+              inline: 'center',
+              behavior: 'smooth',
+            })
+          }
+          href={route}
           key={id}
           className={style.tab}
+          data-selected={pathname.startsWith(route)}
         >
           {label}
-        </span>
+        </Link>
       ))}
     </div>
   );
 }
 
-export const story = () => {
-  const [tab, select] = useState('tab1');
-  return (
-    <TabSelector
-      selected={tab}
-      tabs={[
-        { label: 'Tab 1', id: 'tab1' },
-        { label: 'Tab 2', id: 'tab2' },
-      ]}
-      onSelect={select}
-    />
-  );
-};
+export const story = () => (
+  <TabSelector
+    tabs={[
+      { label: 'Home', route: '/', id: 'home' },
+      { label: 'About', route: '/about', id: 'about' },
+      { label: 'Contact', route: '/contact', id: 'contact' },
+      { label: 'Blog', route: '/blog', id: 'blog' },
+      { label: 'Portfolio', route: '/portfolio', id: 'portfolio' },
+      { label: 'Services', route: '/services', id: 'services' },
+      { label: 'Testimonials', route: '/testimonials', id: 'testimonials' },
+      { label: 'FAQ', route: '/faq', id: 'faq' },
+      { label: 'Contact', route: '/contact', id: 'contact' },
+      { label: 'Contact', route: '/contact', id: 'contact' },
+    ]}
+  />
+);
