@@ -26,7 +26,7 @@ const style = {
     'grid-cols-[0_repeat(auto-fit,calc(var(--item)+var(--item-gap)))] auto-cols-[0]',
     'justify-center',
     'data-[measured=true]:flex',
-    '*:transition-all *:duration-300',
+    'data-[measured=true]:*:transition-all data-[measured=true]:*:duration-300',
     'overflow-hidden'
   ),
   item: cn(
