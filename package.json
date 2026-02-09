@@ -47,9 +47,10 @@
     "vite": "^7.3.1"
   },
   "browserslist": [
-    "defaults",
-    "not ie 11",
-    "> 1%"
+    "> 0.3% in alt-eu",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
   ],
   "msw": {
     "workerDirectory": [
