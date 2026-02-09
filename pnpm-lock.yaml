@@ -47,9 +47,6 @@ importers:
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
-      webdev:
-        specifier: ^0.0.5
-        version: 0.0.5(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.57.1)(rxjs@7.8.2)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.30)(jiti@2.6.1)(lightningcss@1.30.2))
       zod:
         specifier: ^4.3.6
         version: 4.3.6
@@ -1835,9 +1832,6 @@ packages:
 
   '@types/node@22.19.10':
     resolution: {integrity: sha512-tF5VOugLS/EuDlTBijk0MqABfP8UxgYazTLo3uIn3b4yJgg26QRbVYJYsDtHrjdDUIRfP70+VfhTTc+CE1yskw==}
-
-  '@types/node@22.19.7':
-    resolution: {integrity: sha512-MciR4AKGHWl7xwxkBa6xUGxQJ4VBOmPTF7sL+iGzuahOFaO0jHCsuEfS80pan1ef4gWId1oWOweIhrDEYLuaOw==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -4081,15 +4075,6 @@ packages:
     engines: {node: '>=0.1.95'}
     hasBin: true
 
-  webdev@0.0.5:
-    resolution: {integrity: sha512-R3JArSD8dq0SeopWUslbtZ02hC16lnR4zNTnlsb8Z8eGkx39Wb86Rxtlvz8hs7uNI6ir6t7ma4mVk2IV5DDDOA==}
-    peerDependencies:
-      '@types/react': ^19.2.2
-      '@types/react-dom': ^19.2.2
-      react: ^19.1.0
-      react-dom: ^19.1.0
-      rxjs: ^7.8.2
-
   webidl-conversions@8.0.1:
     resolution: {integrity: sha512-BMhLD/Sw+GbJC21C/UgyaZX41nPt8bUTg+jWyDeg7e7YN4xOM05YPSIXceACnXVtqyEw/LMClUQMtMZ+PGGpqQ==}
     engines: {node: '>=20'}
@@ -4798,14 +4783,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor-model@7.32.2(@types/node@22.19.7)':
-    dependencies:
-      '@microsoft/tsdoc': 0.16.0
-      '@microsoft/tsdoc-config': 0.18.0
-      '@rushstack/node-core-library': 5.19.1(@types/node@22.19.7)
-    transitivePeerDependencies:
-      - '@types/node'
-
   '@microsoft/api-extractor@7.56.0(@types/node@22.19.10)':
     dependencies:
       '@microsoft/api-extractor-model': 7.32.2(@types/node@22.19.10)
@@ -4815,25 +4792,6 @@ snapshots:
       '@rushstack/rig-package': 0.6.0
       '@rushstack/terminal': 0.21.0(@types/node@22.19.10)
       '@rushstack/ts-command-line': 5.1.7(@types/node@22.19.10)
-      diff: 8.0.3
-      lodash: 4.17.23
-      minimatch: 10.0.3
-      resolve: 1.22.11
-      semver: 7.5.4
-      source-map: 0.6.1
-      typescript: 5.8.2
-    transitivePeerDependencies:
-      - '@types/node'
-
-  '@microsoft/api-extractor@7.56.0(@types/node@22.19.7)':
-    dependencies:
-      '@microsoft/api-extractor-model': 7.32.2(@types/node@22.19.7)
-      '@microsoft/tsdoc': 0.16.0
-      '@microsoft/tsdoc-config': 0.18.0
-      '@rushstack/node-core-library': 5.19.1(@types/node@22.19.7)
-      '@rushstack/rig-package': 0.6.0
-      '@rushstack/terminal': 0.21.0(@types/node@22.19.7)
-      '@rushstack/ts-command-line': 5.1.7(@types/node@22.19.7)
       diff: 8.0.3
       lodash: 4.17.23
       minimatch: 10.0.3
@@ -6070,26 +6028,9 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.10
 
-  '@rushstack/node-core-library@5.19.1(@types/node@22.19.7)':
-    dependencies:
-      ajv: 8.13.0
-      ajv-draft-04: 1.0.0(ajv@8.13.0)
-      ajv-formats: 3.0.1(ajv@8.13.0)
-      fs-extra: 11.3.3
-      import-lazy: 4.0.0
-      jju: 1.4.0
-      resolve: 1.22.11
-      semver: 7.5.4
-    optionalDependencies:
-      '@types/node': 22.19.7
-
   '@rushstack/problem-matcher@0.1.1(@types/node@22.19.10)':
     optionalDependencies:
       '@types/node': 22.19.10
-
-  '@rushstack/problem-matcher@0.1.1(@types/node@22.19.7)':
-    optionalDependencies:
-      '@types/node': 22.19.7
 
   '@rushstack/rig-package@0.6.0':
     dependencies:
@@ -6104,26 +6045,9 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.19.10
 
-  '@rushstack/terminal@0.21.0(@types/node@22.19.7)':
-    dependencies:
-      '@rushstack/node-core-library': 5.19.1(@types/node@22.19.7)
-      '@rushstack/problem-matcher': 0.1.1(@types/node@22.19.7)
-      supports-color: 8.1.1
-    optionalDependencies:
-      '@types/node': 22.19.7
-
   '@rushstack/ts-command-line@5.1.7(@types/node@22.19.10)':
     dependencies:
       '@rushstack/terminal': 0.21.0(@types/node@22.19.10)
-      '@types/argparse': 1.0.38
-      argparse: 1.0.10
-      string-argv: 0.3.2
-    transitivePeerDependencies:
-      - '@types/node'
-
-  '@rushstack/ts-command-line@5.1.7(@types/node@22.19.7)':
-    dependencies:
-      '@rushstack/terminal': 0.21.0(@types/node@22.19.7)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -6384,10 +6308,6 @@ snapshots:
       undici-types: 6.21.0
 
   '@types/node@22.19.10':
-    dependencies:
-      undici-types: 6.21.0
-
-  '@types/node@22.19.7':
     dependencies:
       undici-types: 6.21.0
 
@@ -9002,25 +8922,6 @@ snapshots:
       - rollup
       - supports-color
 
-  vite-plugin-dts@4.5.4(@types/node@22.19.7)(rollup@4.57.1)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.30)(jiti@2.6.1)(lightningcss@1.30.2)):
-    dependencies:
-      '@microsoft/api-extractor': 7.56.0(@types/node@22.19.7)
-      '@rollup/pluginutils': 5.3.0(rollup@4.57.1)
-      '@volar/typescript': 2.4.27
-      '@vue/language-core': 2.2.0(typescript@5.9.3)
-      compare-versions: 6.1.1
-      debug: 4.4.3
-      kolorist: 1.8.0
-      local-pkg: 1.1.2
-      magic-string: 0.30.21
-      typescript: 5.9.3
-    optionalDependencies:
-      vite: 7.3.1(@types/node@20.19.30)(jiti@2.6.1)(lightningcss@1.30.2)
-    transitivePeerDependencies:
-      - '@types/node'
-      - rollup
-      - supports-color
-
   vite-plugin-storybook-nextjs@3.1.10(next@16.1.6(@babel/core@7.28.6)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(storybook@10.2.3(@testing-library/dom@10.4.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.30)(jiti@2.6.1)(lightningcss@1.30.2)):
     dependencies:
       '@next/env': 16.0.0
@@ -9071,30 +8972,6 @@ snapshots:
     dependencies:
       exec-sh: 0.2.2
       minimist: 1.2.8
-
-  webdev@0.0.5(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rollup@4.57.1)(rxjs@7.8.2)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.30)(jiti@2.6.1)(lightningcss@1.30.2)):
-    dependencies:
-      '@types/assert': 1.5.11
-      '@types/node': 22.19.7
-      '@types/react': 19.2.10
-      '@types/react-dom': 19.2.3(@types/react@19.2.10)
-      assert: 2.1.0
-      observable-hooks: 4.2.4(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(rxjs@7.8.2)
-      path: 0.12.7
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
-      rollup-plugin-dts: 6.3.0(rollup@4.57.1)(typescript@5.9.3)
-      rxjs: 7.8.2
-      sift: 17.1.3
-      tailwind-merge: 3.4.0
-      uuidv4: 6.2.13
-      vite-plugin-dts: 4.5.4(@types/node@22.19.7)(rollup@4.57.1)(typescript@5.9.3)(vite@7.3.1(@types/node@20.19.30)(jiti@2.6.1)(lightningcss@1.30.2))
-      watch: 1.0.2
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
-      - typescript
-      - vite
 
   webidl-conversions@8.0.1: {}
 

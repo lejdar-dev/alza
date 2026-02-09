@@ -25,7 +25,6 @@
     "react-dom": "19.2.3",
     "react-feather": "^2.0.10",
     "resize-observer-polyfill": "^1.5.1",
-    "webdev": "^0.0.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {
