@@ -26,7 +26,7 @@ const eslintConfig = defineConfig([
   {
     ...compat.configs['flat/recommended'],
     settings: {
-      polyfills: ['fetch', 'URL', 'ResizeObserver'],
+      polyfills: ['fetch', 'URL', 'ResizeObserver', 'Promise'],
     },
   },
 
