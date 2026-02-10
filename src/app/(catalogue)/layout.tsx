@@ -1,14 +1,18 @@
 import TabSelector from '@/ui/jsx/molecules/tab-selector';
-import Categories from '@/ui/jsx/organisms/categories';
-import Catalogue from '@/ui/jsx/templates/catalogue';
-import { tabs } from './tabs';
+import Categories, { CategoriesSkeleton } from '@/ui/jsx/organisms/categories';
 import Popular, { PopularSkeleton } from '@/ui/jsx/organisms/popular';
+import Catalogue from '@/ui/jsx/templates/catalogue';
 import { Suspense } from 'react';
+import { tabs } from './tabs';
 
 export default function CatalogueLayout({ gallery }: LayoutProps<'/'>) {
   return (
     <Catalogue
-      categories={<Categories />}
+      categories={
+        <Suspense fallback={<CategoriesSkeleton />}>
+          <Categories />
+        </Suspense>
+      }
       popular={
         <Suspense fallback={<PopularSkeleton />}>
           <Popular />

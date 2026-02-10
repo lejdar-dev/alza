@@ -12,6 +12,8 @@ const style = cn(
 );
 
 export default async function Categories() {
+  'use cache';
+
   const { ok, data: categories } = await fetchCategories();
 
   if (!ok) throw 'Impossible state.';
@@ -20,6 +22,16 @@ export default async function Categories() {
     <div className={style}>
       {categories.map((category) => (
         <Category key={category.id} category={category.label} />
+        ))}
+      </div>
+    );
+}
+
+export async function CategoriesSkeleton() {
+  return (
+    <div className={style}>
+      {Array.from({ length: 13 }).map((_, index) => (
+        <CategorySkeleton key={index} />
       ))}
     </div>
   );
