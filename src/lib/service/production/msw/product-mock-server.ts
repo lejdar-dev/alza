@@ -1,4 +1,7 @@
-// src/mocks/handlers.ts
+/**
+ *  Sets up a mock server for production, since the real API is blocked by Cloudflare.
+ */
+
 import { http, HttpResponse } from 'msw';
 import products from './products.json' assert { type: 'json' };
 

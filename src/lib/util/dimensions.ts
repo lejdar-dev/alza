@@ -33,6 +33,12 @@ export function useResizeObserver<Element extends HTMLElement>(
 export const rem = () => 16;
 export const twUnit = (value: number) => (value / 4) * rem();
 
+/**
+ * This hook calculates the number of items that fit in a container based on the item size.
+ * It uses the useResizeObserver hook to measure the container size and updates the item count accordingly.
+ *
+ * @returns An object containing the item count and a boolean indicating if the items have been measured.
+ */
 export const useFitItems = (
   container: RefObject<HTMLElement | null>,
   itemSize: number

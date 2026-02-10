@@ -11,7 +11,7 @@ const style = {
     'grid grid-rows-[auto_auto_auto_auto_1fr] grid-cols-[1fr_auto] '
   ),
   image: cn(
-    'relative max-w-[calc(100%_-_2rem)] mx-4 mb-4 aspect-square  ',
+    'relative max-w-[calc(100%_-_2rem)] m-4 aspect-square  ',
     'col-span-2 '
   ),
 

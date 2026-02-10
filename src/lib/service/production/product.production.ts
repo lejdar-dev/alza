@@ -78,6 +78,9 @@ export class ProductService implements Repository<'product'> {
     );
   }
 
+  /**
+   * Parameters sent with the request to the API.
+   */
   private static FILTER_PARAMETERS = {
     filterParameters: {
       id: 18855843,
@@ -95,11 +98,13 @@ export class ProductService implements Repository<'product'> {
     },
   };
 
+  /** Expected schema of the error response from the API. */
   private static FAILED_RESPONSE_SCHEMA = z.object({
     err: z.number().positive(),
     msg: z.string().nullable(),
   });
 
+  /** Expected schema of the successful response from the API. */
   private static PRODUCT_RESPONSE_SCHEMA = z.object({
     data: z.array(
       z.object({

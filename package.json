@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "setup": "tsx tool/setup-serivces.mts",
-    "dev": "$npm_execpath run setup && next dev",
-    "build": "$npm_execpath run setup && next build",
-    "start": "$npm_execpath run setup && next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

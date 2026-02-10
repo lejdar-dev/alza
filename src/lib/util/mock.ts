@@ -3,6 +3,10 @@ import { generate } from '@lejdar/webdev';
 import { Category, Product } from '../data/product';
 import { formatPrice } from './format';
 
+/**
+ * This class is a seeded mock utility for generating various types of application data.
+ * Most of its implementation is **AI GENERATED** as it consists of repetitive boilerplate, making it unnecessary to craft manually.
+ */
 export default class Mock {
   faker: Faker;
   constructor(seed: number) {
