@@ -1,7 +1,13 @@
 import type { NextConfig } from 'next';
+import aliases from './tool/setup-interface';
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+
+  turbopack: {
+    resolveAlias: aliases,
+  },
+
   images: {
     remotePatterns: [
       {
