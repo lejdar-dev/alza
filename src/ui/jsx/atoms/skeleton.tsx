@@ -1,4 +1,5 @@
 import { ClassNameProp, cn } from '@lejdar/webdev';
+import { ReactNode } from 'react';
 
 export const SkeletonLine = ({ className }: ClassNameProp) => {
   return (
@@ -11,10 +12,15 @@ export const SkeletonLine = ({ className }: ClassNameProp) => {
     />
   );
 };
-export const SkeletonBox = ({ className }: ClassNameProp) => {
+
+type BoxProps = {
+  children?: ReactNode;
+} & ClassNameProp;
+
+export const SkeletonBox = ({ children, className }: BoxProps) => {
   return (
-    <div
-      className={cn('bg-surface w-full h-full', 'animate-pulse', className)}
-    />
+    <div className={cn('bg-surface w-full h-full', 'animate-pulse', className)}>
+      {children}
+    </div>
   );
 };
