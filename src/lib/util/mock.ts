@@ -44,6 +44,21 @@ export default class Mock {
       label: this.faker.commerce.department(),
     };
   }
+
+  async timeout(max: number) {
+    await new Promise((resolve) => {
+      setTimeout(
+        () => {
+          resolve(void 0);
+        },
+        this.faker.number.int({ min: 0, max })
+      );
+    });
+  }
+
+  decide(): boolean {
+    return this.faker.datatype.boolean();
+  }
 }
 
 export const mock = new Mock(2500);
