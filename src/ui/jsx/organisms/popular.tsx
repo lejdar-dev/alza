@@ -1,4 +1,9 @@
-import { fetchPopularProducts } from '@/lib/api/product.api';
+import {
+  fetchPopularProducts,
+  refreshPopularProducts,
+} from '@/lib/api/product.api';
+import { Repeat } from 'lucide-react';
+import ErrorBanner from '../atoms/error-banner';
 import Carousel from '../molecules/carousel';
 import PopularProduct, {
   PopularProductSkeleton,
@@ -6,16 +11,33 @@ import PopularProduct, {
 
 export default async function Popular() {
   'use cache';
-  const { ok, data: products, error } = await fetchPopularProducts();
 
-  if (!ok) return 'Error occured.';
+  const { ok, data: products } = await fetchPopularProducts();
+
+  if (ok)
+    return (
+      <Carousel itemWidth={60} itemGap={8}>
+        {products.map((product) => (
+          <PopularProduct key={product.id} product={product} />
+        ))}
+      </Carousel>
+    );
 
   return (
-    <Carousel itemWidth={60} itemGap={8}>
-      {products.map((product) => (
-        <PopularProduct key={product.id} product={product} />
-      ))}
-    </Carousel>
+    <ErrorBanner
+      loadingUI={<PopularSkeleton />}
+      // eslint-disable-next-line react-hooks/purity
+      key={Math.random().toString()}
+      retry={refreshPopularProducts}
+      message={'Při komunikaci se serverem došlo k chybě.'}
+      retryMessage={
+        <>
+          <Repeat size={16} />
+          Načíst znovu
+        </>
+      }
+      className="h-132"
+    />
   );
 }
 

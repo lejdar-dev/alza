@@ -1,6 +1,6 @@
 import { Network, Server, Validation } from '@/lib/data/reason';
 import bindAll from '@/lib/util/bind-all';
-import { generate, Result } from '@lejdar/webdev';
+import { Result, generate } from '@lejdar/webdev';
 import { Category, Product } from '../../data/product';
 import Mock from '../../util/mock';
 import { type Repository } from '../brain';
@@ -20,7 +20,7 @@ export class ProudctMockService implements Repository<'product'> {
 
     return Result.ok(products);
   }
-  async fetchCategories(): Promise<Result.Ok<Category[]>> {
+  async fetchCategories(): Promise<Result<Category[], Network | Validation>> {
     const categories = generate(
       this.mock.faker.number.int({ min: 5, max: 15 }),
       this.mock.makeUpCategory
