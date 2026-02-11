@@ -1,3 +1,7 @@
+/**
+ * This file describes all expected reasons for errors to happen.
+ */
+
 type Reason<Cause, Payload extends object = never> = [Payload] extends [never]
   ? { cause: Cause }
   : { cause: Cause } & Payload;

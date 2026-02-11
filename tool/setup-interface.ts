@@ -1,3 +1,14 @@
+/**
+ * This tool sets up the application's service interface.
+ * It generates an `interface.d.ts` file in the `.next/types` directory.
+ * This file declares the `@services` module and points to the appropriate implementation based on the selected environment.
+ * It also sets up Turbopack aliases to ensure `@services` resolves to the correct service module (`mock`, `development`, or `production`).
+ *
+ * Environment can be switched by setting the `INTERFACE` environment variable to `mock`, `development`, or `production`.
+ * Restarting the development server is required to apply the changes.
+ * Default environment is `production`.
+ */
+
 import { mkdirSync, writeFileSync } from 'fs';
 import { TurbopackOptions } from 'next/dist/server/config-shared';
 
