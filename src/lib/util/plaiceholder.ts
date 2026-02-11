@@ -1,7 +1,5 @@
 'use server';
 
-import { getPlaiceholder } from 'plaiceholder';
-
 /**
  * Generates a placeholder, lowresolution image for a given image URL.
  * Only runs on the server side. (uses @sharp library for image processing)
@@ -11,6 +9,8 @@ export async function generatePlaceholder(src: string): Promise<string> {
 
   // Storybook cannot run @sharp library responsible for image processing
   if (process.env.STORYBOOK) return placeholder;
+
+  const { getPlaiceholder } = await import('plaiceholder');
 
   return fetch(src)
     .then((res) => res.arrayBuffer())
