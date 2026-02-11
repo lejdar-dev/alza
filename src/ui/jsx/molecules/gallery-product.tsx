@@ -11,10 +11,7 @@ const style = {
     'mx-w-full w-full relative',
     'grid grid-rows-[auto_repeat(4,auto)_1fr] grid-cols-[1fr_auto]'
   ),
-  image: cn(
-    'relative w-[calc(100%_-_2rem)] ml-4 aspect-square ',
-    'col-span-2 '
-  ),
+  image: cn('relative w-[calc(100%_-_2rem)] m-4 aspect-square ', 'col-span-2 '),
   rating: cn('text-lg', 'absolute', 'left-[-1rem]', 'bottom-2'),
   novat: cn('text-positive text-lg mt-2'),
   vat: cn('text-text-low text-sm'),
