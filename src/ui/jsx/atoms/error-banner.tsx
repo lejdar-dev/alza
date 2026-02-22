@@ -1,4 +1,3 @@
-'use client';
 import { ClassNameProp, cn } from '@lejdar/webdev';
 import { AlertTriangle, Repeat } from 'lucide-react';
 import { ReactNode } from 'react';

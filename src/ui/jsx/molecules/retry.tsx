@@ -1,3 +1,4 @@
+'use client';
 import { ClassNameProp, cn } from '@lejdar/webdev';
 import { Repeat } from 'lucide-react';
 import { ReactNode, useCallback, useTransition } from 'react';
