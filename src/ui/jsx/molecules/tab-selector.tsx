@@ -1,7 +1,7 @@
 'use client';
 
 import { ClassNameProp, cn } from '@lejdar/webdev';
-import { Book, Briefcase, Contact, Heart, HelpCircle, Home, Info, Server } from 'lucide-react';
+import { Book, Contact, Home, Info } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -24,7 +24,8 @@ const style = {
     'max-md:justify-center',
     'max-md:text-sm',
     'max-sm:grid max-sm:grid-cols-[1fr_1fr]',
-    'max-sm:gap-2'
+    'max-xs:flex max-sm:flex-col',
+    'max-xs:gap-2'
   ),
   tab: cn(
     'flex items-center gap-2',
@@ -52,13 +53,6 @@ export default function TabSelector(props: Props) {
     <div className={cn(style.container, className)}>
       {tabs.map(({ label, routes, id, icon }) => (
         <Link
-          onClick={({ currentTarget }) =>
-            currentTarget.scrollIntoView({
-              block: 'nearest',
-              inline: 'center',
-              behavior: 'smooth',
-            })
-          }
           href={routes[0]}
           key={id}
           className={style.tab}
