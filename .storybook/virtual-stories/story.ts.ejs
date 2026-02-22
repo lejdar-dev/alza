@@ -1,0 +1,28 @@
+import * as tested from '/<%= module %>';
+import { mock } from '/src/lib/util/mock';
+
+const story = 'story' in tested ? await tested.story : UnimplementedStory;
+
+
+
+const { component, args } = typeof story === 'function' ? {
+  component: story,
+  args: {}
+} : story
+                    
+
+export default {
+  component
+}
+    
+export const <%= story %> = {
+  args: {
+    ...(typeof args === 'function' ? await args() : args),
+    mock
+  }
+};        
+
+
+function UnimplementedStory(){
+  return '🏗️ Story is not implemented.'
+}

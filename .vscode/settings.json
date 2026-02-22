@@ -13,5 +13,8 @@
     "source.fixAll.prettier": "always",
     "source.fixAll.eslint": "always",
     "source.organizeImports": "always"
+  },
+  "files.associations": {
+    "*.ts.ejs": "typescript"
   }
 }
