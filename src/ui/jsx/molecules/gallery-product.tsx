@@ -5,6 +5,7 @@ import PreloadedImage from '../atoms/preloaded-image';
 import Rating from '../atoms/rating';
 import { SkeletonBox, SkeletonLine } from '../atoms/skeleton';
 import BuyMenu from './buy-menu';
+import PreloadedImage from './preloaded-image';
 
 const style = {
   container: cn(
