@@ -2,7 +2,6 @@ import {
   fetchPopularProducts,
   refreshPopularProducts,
 } from '@/lib/api/product.api';
-import { Repeat } from 'lucide-react';
 import { Suspense } from 'react';
 import Carousel from '../molecules/carousel';
 import PopularProduct, {
@@ -31,12 +30,7 @@ export default async function Popular() {
       key={Math.random().toString()}
       retry={refreshPopularProducts}
       message={'Při komunikaci se serverem došlo k chybě.'}
-      retryMessage={
-        <>
-          <Repeat size={16} />
-          Načíst znovu
-        </>
-      }
+      retryMessage={'Načíst znovu'}
       className="h-132"
     />
   );

@@ -1,6 +1,5 @@
 import { fetchProducts, refreshProducts } from '@/lib/api/product.api';
 import { cn } from '@lejdar/webdev';
-import { Repeat } from 'lucide-react';
 import { Suspense } from 'react';
 import GalleryProduct, {
   GalleryProductSkeleton,
@@ -34,12 +33,7 @@ export default async function Gallery() {
       key={Math.random().toString()}
       retry={refreshProducts}
       message={'Při komunikaci se serverem došlo k chybě.'}
-      retryMessage={
-        <>
-          <Repeat size={16} />
-          Načíst znovu
-        </>
-      }
+      retryMessage={'Načíst znovu'}
     />
   );
 }
