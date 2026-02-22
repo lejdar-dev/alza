@@ -21,7 +21,6 @@
     "paths": {
       "@/*": ["./src/*"],
       "@data/*": ["./src/lib/data/*"],
-      "@services": ["./src/lib/service/development/services.development.ts"],
       "@story": [".storybook/virtual-stories/story.ts"]
     }
   },
