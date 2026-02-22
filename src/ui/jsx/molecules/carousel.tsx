@@ -1,12 +1,19 @@
 /* eslint-disable react/no-children-prop */
 'use client';
+import { useAfterFrame } from '@/lib/util/after-frame';
 import { useCounter } from '@/lib/util/counter';
 import { twUnit, useFitItems } from '@/lib/util/dimensions';
 import { useInterval } from '@/lib/util/time';
 import { cn, generate } from '@lejdar/webdev';
 import { writeStory } from '@story';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React, { Activity, CSSProperties, ReactNode, useRef } from 'react';
+import React, {
+  Activity,
+  CSSProperties,
+  ReactNode,
+  useRef,
+  useState,
+} from 'react';
 
 type Props = {
   itemWidth: number;
@@ -24,11 +31,13 @@ const style = {
     'grid-cols-[0_repeat(auto-fit,calc(var(--item)+var(--item-gap)))] auto-cols-[0]',
     // Flexible animated layout for hydrated state
     'data-[measured=true]:flex justify-center',
-    '*:w-[calc(var(--item)_+_var(--item-gap))]'
+    '*:w-[calc(var(--item)_+_var(--item-gap))]',
+    // Prevents flickering caused by initial trnasition
+    'data-[animated=false]:*:transition-none'
   ),
   item: cn(
     'flex justify-center',
-    'max-w-full',
+    'max-w-full overflow-hidden',
     'collapsible data-[collapsed=true]:collapsed'
   ),
 
@@ -58,11 +67,16 @@ export default function Carousel({ itemGap, itemWidth, children }: Props) {
       // Whether is collapsed
       collapsed:
         hasBeenMeasured && (delta < 0 || delta >= Math.max(itemCount, 1)),
-      // Whether is visible or animated (optimizes & prevents flickering from initial transition)
-      active: hasBeenMeasured && delta <= Math.max(itemCount, 1),
-      children: items[(items.length + (index + delta)) % items.length],
+      // !active = optimized during render
+      active: !hasBeenMeasured || delta <= Math.max(itemCount, 1),
+      children:
+        items[(items.length + ((index % items.length) + delta)) % items.length],
       key: index + delta,
     }));
+
+  // Prevents flickering caused by initial transition
+  const [isAnimated, setIsAnimated] = useState(false);
+  useAfterFrame(() => setIsAnimated(hasBeenMeasured), [hasBeenMeasured]);
 
   return (
     <div className={style.container} style={variables}>
@@ -71,6 +85,7 @@ export default function Carousel({ itemGap, itemWidth, children }: Props) {
         ref={container}
         className={style.items}
         data-measured={hasBeenMeasured}
+        data-animated={isAnimated}
       >
         {itemStates.map(({ active, children, collapsed, key }) => (
           <Activity key={key} mode={active ? 'visible' : 'hidden'}>
