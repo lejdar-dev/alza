@@ -68,26 +68,21 @@ export function PopularProductSkeleton() {
   );
 }
 
-export const story = {
+export const story = writeStory({
   args: {
     skeleton: false,
     extraLongSpecs: false,
     extraLongName: false,
   },
-  component: ({
-    skeleton,
-    extraLongSpecs,
-    extraLongName,
-  }: {
-    skeleton: boolean;
-    extraLongSpecs: boolean;
-    extraLongName: boolean;
-  }) =>
-    skeleton ? (
-      <PopularProductSkeleton />
-    ) : (
-      <PopularProduct
-        product={mock.makeUpProduct({ extraLongSpecs, extraLongName })}
-      />
-    ),
-};
+  component({ mock, skeleton, ...mockProps }) {
+    if (skeleton) return <PopularProductSkeleton />;
+
+    const product = mock.makeUpProduct(mockProps);
+
+    return (
+      <Suspense fallback={<PopularProductSkeleton />}>
+        <PopularProduct product={product} />
+      </Suspense>
+    );
+  },
+});

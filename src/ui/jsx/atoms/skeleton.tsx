@@ -24,3 +24,13 @@ export const SkeletonBox = ({ children, className }: BoxProps) => {
     </div>
   );
 };
+
+export const story = () => (
+  <div className="flex flex-col gap-2 w-xs">
+    <SkeletonBox className="aspect-square" />
+
+    <SkeletonLine />
+    <SkeletonLine />
+    <SkeletonLine className="w-[70%]" />
+  </div>
+);

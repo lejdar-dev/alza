@@ -47,3 +47,15 @@ export default function TransitionImage(props: Props) {
     </>
   );
 }
+
+export const story = () => (
+  <div className="relative w-120 h-120">
+    <TransitionImage
+      alt="Optimized image"
+      src="https://p2-ofp.static.pub//fes/cms/2024/07/17/109vq5fdalv01w5jsu6vh35ncnk5jn890135.png"
+      blurDataUrl="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAS0lEQVR4nGNwiM3QDirvS5eKaUoHsRnSZh4uPPL///+WbV//e5bOKGQw9ohrcwgv/m9uH/Rf28avjaG9sdGfl40hjZWVI629qd0fAOFkG3lVMpbVAAAAAElFTkSuQmCC"
+      className="object-contain"
+      fill
+    />
+  </div>
+);

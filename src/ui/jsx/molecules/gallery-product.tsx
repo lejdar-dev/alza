@@ -83,31 +83,22 @@ export function GalleryProductSkeleton() {
   );
 }
 
-export const story = {
-  args: {
+export const story = writeStory({
+  args: async () => ({
     skeleton: false,
     extraLongName: false,
     extraLongSpecs: false,
-  },
-  component: async ({
-    skeleton,
-    extraLongName,
-    extraLongSpecs,
-  }: {
-    skeleton: boolean;
-    extraLongName: boolean;
-    extraLongSpecs: boolean;
-  }) => {
+  }),
+
+  component({ mock, skeleton, ...mockProps }) {
     if (skeleton) return <GalleryProductSkeleton />;
 
-    const { mock } = await import('@/lib/util/mock');
+    const product = mock.makeUpProduct(mockProps);
 
     return (
-      <div className={'w-60'}>
-        <GalleryProduct
-          product={mock.makeUpProduct({ extraLongName, extraLongSpecs })}
-        />
-      </div>
+      <Suspense fallback={<GalleryProductSkeleton />}>
+        <GalleryProduct product={product} />
+      </Suspense>
     );
   },
-};
+});

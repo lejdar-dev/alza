@@ -76,14 +76,19 @@ export const story = () => (
   <TabSelector
     tabs={[
       { label: 'Home', routes: ['/'], id: 'home', icon: <Home /> },
-      { label: 'About', routes: ['/about'], id: 'about', icon: <Info/> },
-      { label: 'Contact', routes: ['/contact'], id: 'contact', icon: <Contact/> },
-      { label: 'Blog', routes: ['/blog'], id: 'blog', icon: <Book/> },
-      { label: 'Portfolio', routes: ['/portfolio'], id: 'portfolio', icon: <Briefcase/> },
-      { label: 'Services', routes: ['/services'], id: 'services', icon: <Server/> },
-      { label: 'Testimonials', routes: ['/testimonials'], id: 'testimonials', icon: <Heart /> },
-      { label: 'FAQ', routes: ['/faq'], id: 'faq', icon: <HelpCircle /> },
-      { label: 'Contact', routes: ['/contact'], id: 'contact', icon: <Contact/> },
+      { label: 'About', routes: ['/about'], id: 'about', icon: <Info /> },
+      {
+        label: 'Contact',
+        routes: ['/contact'],
+        id: 'contact',
+        icon: <Contact />,
+      },
+      {
+        label: 'Nejprodavanejsi',
+        routes: ['/blog'],
+        id: 'blog',
+        icon: <Book />,
+      },
     ]}
   />
 );

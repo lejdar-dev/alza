@@ -89,3 +89,22 @@ export default function Carousel(props: Props) {
     </div>
   );
 }
+
+export const story = writeStory({
+  args: {
+    itemCount: 10,
+  },
+
+  component: ({ itemCount }) => (
+    <Carousel itemWidth={100} itemGap={10}>
+      {generate(itemCount, (index) => (
+        <div
+          className="w-100 h-100 grid place-items-center bg-gray-300 rounded"
+          key={index}
+        >
+          {index}
+        </div>
+      ))}
+    </Carousel>
+  ),
+});
