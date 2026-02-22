@@ -39,6 +39,7 @@
     "eslint-plugin-compat": "^6.1.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-storybook": "^10.2.3",
+    "micro-memoize": "^5.1.1",
     "msw": "^2.12.9",
     "storybook": "^10.2.3",
     "tailwindcss": "^4",
