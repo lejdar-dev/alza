@@ -1,14 +1,14 @@
-import { mock } from '@/lib/util/mock';
 import { Product } from '@data/product';
 import { cn } from '@lejdar/webdev';
-import PreloadedImage from '../atoms/preloaded-image';
+import { writeStory } from '@story';
+import { Suspense } from 'react';
 import Rating from '../atoms/rating';
 import { SkeletonBox, SkeletonLine } from '../atoms/skeleton';
 import PreloadedImage from './preloaded-image';
 
 const style = {
   container: cn(
-    'w-60 h-132 relative',
+    'max-w-full w-60 h-132 relative',
     'grid grid-rows-[auto_auto_auto_auto_1fr] grid-cols-[1fr_auto] '
   ),
   image: cn(
