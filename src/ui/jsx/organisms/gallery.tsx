@@ -1,7 +1,7 @@
 import { fetchProducts, refreshProducts } from '@/lib/api/product.api';
 import { cn } from '@lejdar/webdev';
 import { Repeat } from 'lucide-react';
-import ErrorBanner from '../atoms/error-banner';
+import { Suspense } from 'react';
 import GalleryProduct, {
   GalleryProductSkeleton,
 } from '../molecules/gallery-product';
@@ -68,4 +68,8 @@ export function GallerySkeleton() {
   );
 }
 
-export const story = () => <Gallery />;
+export const story = () => (
+  <Suspense fallback={<GallerySkeleton />}>
+    <Gallery />
+  </Suspense>
+);

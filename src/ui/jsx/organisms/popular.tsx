@@ -3,7 +3,7 @@ import {
   refreshPopularProducts,
 } from '@/lib/api/product.api';
 import { Repeat } from 'lucide-react';
-import ErrorBanner from '../atoms/error-banner';
+import { Suspense } from 'react';
 import Carousel from '../molecules/carousel';
 import PopularProduct, {
   PopularProductSkeleton,
@@ -59,4 +59,8 @@ export function PopularSkeleton() {
   );
 }
 
-export const story = () => <Popular />;
+export const story = () => (
+  <Suspense fallback={<PopularSkeleton />}>
+    <Popular />
+  </Suspense>
+);
