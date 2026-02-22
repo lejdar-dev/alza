@@ -71,8 +71,8 @@ export default function BuyMenu({ className }: ClassNameProp) {
         <span>Koupit</span>
         <ChevronDown />
       </Button>
-      <Popover className={style.menu} placement="bottom right">
-        <Menu>
+      <Popover placement="bottom right">
+        <Menu className={style.menu}>
           {options.map(({ icon: Icon, label, highlight }, index) => (
             <MenuItem
               style={{ '--delay': `${index * 0.05}s` } as CSSProperties}
