@@ -9,7 +9,13 @@ import {
 import { CSSProperties } from 'react';
 
 import { ClassNameProp, cn } from '@lejdar/webdev';
-import { Menu, MenuItem, MenuPopover, MenuTrigger } from './menu';
+import {
+  Button,
+  Menu,
+  MenuItem,
+  MenuTrigger,
+  Popover,
+} from 'react-aria-components';
 
 const style = {
   trigger: cn(
@@ -60,25 +66,27 @@ const options = [
 
 export default function BuyMenu({ className }: ClassNameProp) {
   return (
-    <Menu>
-      <MenuTrigger className={cn(style.trigger, className)}>
+    <MenuTrigger>
+      <Button className={cn(style.trigger, className)}>
         <span>Koupit</span>
         <ChevronDown />
-      </MenuTrigger>
-      <MenuPopover className={style.menu} placement="bottom right">
-        {options.map(({ icon: Icon, label, highlight }, index) => (
-          <MenuItem
-            style={{ '--delay': `${index * 0.05}s` } as CSSProperties}
-            key={label}
-            data-highlight={highlight}
-            className={style.option}
-          >
-            {<Icon strokeWidth={0.5} />}
-            <span>{label}</span>
-          </MenuItem>
-        ))}
-      </MenuPopover>
-    </Menu>
+      </Button>
+      <Popover className={style.menu} placement="bottom right">
+        <Menu>
+          {options.map(({ icon: Icon, label, highlight }, index) => (
+            <MenuItem
+              style={{ '--delay': `${index * 0.05}s` } as CSSProperties}
+              key={label}
+              data-highlight={highlight}
+              className={style.option}
+            >
+              {<Icon strokeWidth={0.5} />}
+              <span>{label}</span>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Popover>
+    </MenuTrigger>
   );
 }
 
