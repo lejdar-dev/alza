@@ -5,6 +5,7 @@ import ErrorBanner from '../atoms/error-banner';
 import GalleryProduct, {
   GalleryProductSkeleton,
 } from '../molecules/gallery-product';
+import Retry from '../molecules/retry';
 
 const style = cn(
   'grid grid-cols-[repeat(auto-fit,15rem)] gap-12 justify-center max-w-full',
@@ -27,7 +28,7 @@ export default async function Gallery() {
     );
 
   return (
-    <ErrorBanner
+    <Retry
       loadingUI={<GallerySkeleton />}
       // eslint-disable-next-line react-hooks/purity
       key={Math.random().toString()}

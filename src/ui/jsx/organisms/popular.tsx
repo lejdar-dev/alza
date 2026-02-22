@@ -8,6 +8,7 @@ import Carousel from '../molecules/carousel';
 import PopularProduct, {
   PopularProductSkeleton,
 } from '../molecules/popular-product';
+import Retry from '../molecules/retry';
 
 export default async function Popular() {
   'use cache';
@@ -24,7 +25,7 @@ export default async function Popular() {
     );
 
   return (
-    <ErrorBanner
+    <Retry
       loadingUI={<PopularSkeleton />}
       // eslint-disable-next-line react-hooks/purity
       key={Math.random().toString()}
