@@ -1,15 +1,12 @@
+/* eslint-disable react/no-children-prop */
 'use client';
+import { useCounter } from '@/lib/util/counter';
 import { twUnit, useFitItems } from '@/lib/util/dimensions';
 import { useInterval } from '@/lib/util/time';
 import { cn, generate } from '@lejdar/webdev';
+import { writeStory } from '@story';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import React, {
-  CSSProperties,
-  ReactNode,
-  useCallback,
-  useRef,
-  useState,
-} from 'react';
+import React, { Activity, CSSProperties, ReactNode, useRef } from 'react';
 
 type Props = {
   itemWidth: number;
@@ -18,42 +15,33 @@ type Props = {
 };
 
 const style = {
-  container: cn(' w-full flex justify-center'),
+  container: cn('w-full flex justify-center'),
 
   items: cn(
-    'max-w-full flex-1',
+    'max-w-full flex-1 overflow-hidden',
+    // SS-Rendered responsive state
     'grid grid-flow-col',
     'grid-cols-[0_repeat(auto-fit,calc(var(--item)+var(--item-gap)))] auto-cols-[0]',
-    'justify-center',
-    'data-[measured=true]:flex',
-    'data-[measured=true]:*:transition-all data-[measured=true]:*:duration-300',
-    'overflow-hidden'
+    // Flexible animated layout for hydrated state
+    'data-[measured=true]:flex justify-center',
+    '*:w-[calc(var(--item)_+_var(--item-gap))]'
   ),
   item: cn(
     'flex justify-center',
-    'w-[calc(var(--item)_+_var(--item-gap))]',
-    'max-w-full overflow-hidden',
-    'data-[collapsed=true]:w-0',
-    'data-[collapsed=true]:scale-0'
+    'max-w-full',
+    'collapsible data-[collapsed=true]:collapsed'
   ),
 
   arrow: cn(`w-10 h-10 mt-8`, 'cursor-pointer select-none', 'active:scale-95'),
 };
 
-export default function Carousel(props: Props) {
-  const { itemGap, itemWidth, children } = props;
-
-  const [index, setIndex] = useState(0);
-
-  const next = useCallback(() => setIndex((index) => index + 1), []);
-  const previous = useCallback(() => setIndex((index) => index - 1), []);
+export default function Carousel({ itemGap, itemWidth, children }: Props) {
+  const items = React.Children.toArray(children);
+  const { index, next, previous } = useCounter();
 
   useInterval(7000, next);
 
-  const items = React.Children.toArray(children);
-
   const container = useRef<HTMLDivElement>(null);
-
   const { itemCount, hasBeenMeasured } = useFitItems(
     container,
     twUnit(itemWidth + itemGap)
@@ -64,25 +52,34 @@ export default function Carousel(props: Props) {
     '--item-gap': `${itemGap * 0.25}rem`,
   } as CSSProperties;
 
+  const itemStates =
+    // Render every item + one on each edge, ready for the animation to by cycled
+    generate(children.length + 2, (delta) => delta - 1).map((delta) => ({
+      // Whether is collapsed
+      collapsed:
+        hasBeenMeasured && (delta < 0 || delta >= Math.max(itemCount, 1)),
+      // Whether is visible or animated (optimizes & prevents flickering from initial transition)
+      active: hasBeenMeasured && delta <= Math.max(itemCount, 1),
+      children: items[(items.length + (index + delta)) % items.length],
+      key: index + delta,
+    }));
+
   return (
     <div className={style.container} style={variables}>
       <ChevronLeft className={style.arrow} onClick={previous} />
       <div
-        className={style.items}
         ref={container}
+        className={style.items}
         data-measured={hasBeenMeasured}
       >
-        {generate(children.length + 2, (delta) => delta - 1).map((delta) => (
-          <div
-            className={cn(style.item, 'group/image')}
-            data-blurred={!hasBeenMeasured}
-            key={`${'measuring:'.repeat(+!hasBeenMeasured)}:${index + delta}`}
-            data-collapsed={
-              hasBeenMeasured && (delta < 0 || delta >= Math.max(itemCount, 1))
-            }
-          >
-            {items[(items.length + (index + delta)) % items.length]}
-          </div>
+        {itemStates.map(({ active, children, collapsed, key }) => (
+          <Activity key={key} mode={active ? 'visible' : 'hidden'}>
+            <div
+              className={style.item}
+              data-collapsed={collapsed}
+              children={children}
+            />
+          </Activity>
         ))}
       </div>
       <ChevronRight className={style.arrow} onClick={next} />
