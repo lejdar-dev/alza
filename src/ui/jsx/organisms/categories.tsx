@@ -1,8 +1,7 @@
 import { fetchCategories, refreshCategories } from '@/lib/api/product.api';
 import { cn } from '@lejdar/webdev';
-import { Repeat } from 'lucide-react';
 import Category, { CategorySkeleton } from '../atoms/category';
-import ErrorBanner from '../atoms/error-banner';
+import Retry from '../molecules/retry';
 
 const style = cn(
   `grid gap-3`,
@@ -28,17 +27,12 @@ export default async function Categories() {
     );
 
   return (
-    <ErrorBanner
+    <Retry
       // eslint-disable-next-line react-hooks/purity
       key={Math.random().toString()}
       retry={refreshCategories}
       message={'Při komunikaci se serverem došlo k chybě.'}
-      retryMessage={
-        <>
-          <Repeat size={16} />
-          Načíst znovu
-        </>
-      }
+      retryMessage={'Načíst znovu'}
     />
   );
 }
