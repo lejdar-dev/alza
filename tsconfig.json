@@ -21,7 +21,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@data/*": ["./src/lib/data/*"],
-      "@story": [".storybook/virtual-stories/story.ts"]
+      "@story": ["./.storybook/virtual-stories/story.ts"]
     }
   },
   "include": [
