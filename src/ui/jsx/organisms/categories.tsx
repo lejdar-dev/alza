@@ -4,10 +4,10 @@ import Category, { CategorySkeleton } from '../atoms/category';
 import Retry from '../molecules/retry';
 
 const style = cn(
-  `grid gap-3`,
+  `grid gap-3 w-full`,
 
-  'max-sm:grid-cols-[1fr_1fr] ',
-  'min-sm:grid-cols-[repeat(auto-fit,12rem)]',
+  'max-sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] ',
+  'min-sm:grid-cols-[repeat(auto-fit,_12rem)]',
 
   'max-sm:text-sm'
 );
