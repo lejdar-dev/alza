@@ -1,47 +1,26 @@
 'use client';
 import {
-    ChevronDown,
-    Eye,
-    ListPlus,
-    Scale,
-    ShoppingBasket,
+  ChevronDown,
+  Eye,
+  ListPlus,
+  Scale,
+  ShoppingBasket,
 } from 'lucide-react';
 import { CSSProperties } from 'react';
 
 import { ClassNameProp, cn } from '@lejdar/webdev';
-import { Menu, MenuItem, MenuPopover, MenuTrigger } from '../atoms/menu';
-
-const options = [
-  {
-    label: 'Koupit zrychleně',
-    icon: ShoppingBasket,
-    highlight: true,
-    action: () => console.log('Koupit zrychleně'),
-  },
-  {
-    label: 'Porovnat',
-    icon: Scale,
-    highlight: false,
-    action: () => console.log('Porovnat'),
-  },
-  {
-    label: 'Hlídat',
-    icon: Eye,
-    highlight: false,
-    action: () => console.log('Hlídat'),
-  },
-  {
-    label: 'Přidat do seznamu',
-    icon: ListPlus,
-    highlight: false,
-    action: () => console.log('Přidat do seznamu'),
-  },
-];
+import {
+  Button,
+  Menu,
+  MenuItem,
+  MenuTrigger,
+  Popover,
+} from 'react-aria-components';
 
 const style = {
   trigger: cn(
     'grid grid-cols-[1fr_auto]',
-    'min-w-24 h-min p-1 ',
+    'w-24 h-min p-1 ',
     'bg-secondary text-on-secondary',
     'cursor-pointer',
     'outline-none'
@@ -62,27 +41,52 @@ const style = {
   ),
 };
 
+const options = [
+  {
+    label: 'Koupit zrychleně',
+    icon: ShoppingBasket,
+    highlight: true,
+  },
+  {
+    label: 'Porovnat',
+    icon: Scale,
+    highlight: false,
+  },
+  {
+    label: 'Hlídat',
+    icon: Eye,
+    highlight: false,
+  },
+  {
+    label: 'Přidat do seznamu',
+    icon: ListPlus,
+    highlight: false,
+  },
+];
+
 export default function BuyMenu({ className }: ClassNameProp) {
   return (
-    <Menu>
-      <MenuTrigger className={cn(style.trigger, className)}>
+    <MenuTrigger>
+      <Button className={cn(style.trigger, className)}>
         <span>Koupit</span>
         <ChevronDown />
-      </MenuTrigger>
-      <MenuPopover className={style.menu} placement="bottom right">
-        {options.map(({ icon: Icon, label, highlight }, index) => (
-          <MenuItem
-            style={{ '--delay': `${index * 0.05}s` } as CSSProperties}
-            key={label}
-            data-highlight={highlight}
-            className={style.option}
-          >
-            {<Icon strokeWidth={0.5} />}
-            <span>{label}</span>
-          </MenuItem>
-        ))}
-      </MenuPopover>
-    </Menu>
+      </Button>
+      <Popover placement="bottom right">
+        <Menu className={style.menu}>
+          {options.map(({ icon: Icon, label, highlight }, index) => (
+            <MenuItem
+              style={{ '--delay': `${index * 0.05}s` } as CSSProperties}
+              key={label}
+              data-highlight={highlight}
+              className={style.option}
+            >
+              {<Icon strokeWidth={0.5} />}
+              <span>{label}</span>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Popover>
+    </MenuTrigger>
   );
 }
 

@@ -12,3 +12,11 @@
     }
   }
 }
+
+@utility collapsible {
+  @apply transition-all duration-300;
+}
+
+@utility collapsed {
+  @apply w-0 scale-0;
+}

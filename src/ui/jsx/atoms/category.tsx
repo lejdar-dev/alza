@@ -2,7 +2,7 @@ import { cn } from '@lejdar/webdev';
 import { SkeletonBox } from './skeleton';
 
 const style = cn(
-  `w-full p-4 py-3`,
+  `w-128 p-4 py-3`,
   'max-w-full',
   'text-center',
   'bg-surface shadow-sm',

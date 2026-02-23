@@ -1,13 +1,14 @@
-import { mock } from '@/lib/util/mock';
 import { Product } from '@data/product';
 import { cn } from '@lejdar/webdev';
-import PreloadedImage from '../atoms/preloaded-image';
+import { writeStory } from '@story';
+import { Suspense } from 'react';
 import Rating from '../atoms/rating';
 import { SkeletonBox, SkeletonLine } from '../atoms/skeleton';
+import PreloadedImage from './preloaded-image';
 
 const style = {
   container: cn(
-    'w-60 h-132 relative',
+    'max-w-full w-60 h-132 relative',
     'grid grid-rows-[auto_auto_auto_auto_1fr] grid-cols-[1fr_auto] '
   ),
   image: cn(
@@ -68,26 +69,21 @@ export function PopularProductSkeleton() {
   );
 }
 
-export const story = {
+export const story = writeStory({
   args: {
     skeleton: false,
     extraLongSpecs: false,
     extraLongName: false,
   },
-  component: ({
-    skeleton,
-    extraLongSpecs,
-    extraLongName,
-  }: {
-    skeleton: boolean;
-    extraLongSpecs: boolean;
-    extraLongName: boolean;
-  }) =>
-    skeleton ? (
-      <PopularProductSkeleton />
-    ) : (
-      <PopularProduct
-        product={mock.makeUpProduct({ extraLongSpecs, extraLongName })}
-      />
-    ),
-};
+  component({ mock, skeleton, ...mockProps }) {
+    if (skeleton) return <PopularProductSkeleton />;
+
+    const product = mock.makeUpProduct(mockProps);
+
+    return (
+      <Suspense fallback={<PopularProductSkeleton />}>
+        <PopularProduct product={product} />
+      </Suspense>
+    );
+  },
+});

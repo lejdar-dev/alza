@@ -1,18 +1,20 @@
 import { sanitize } from '@/lib/util/sanitize';
 import { Product } from '@data/product';
 import { cn } from '@lejdar/webdev';
-import PreloadedImage from '../atoms/preloaded-image';
+import { writeStory } from '@story';
+import { Suspense } from 'react';
 import Rating from '../atoms/rating';
 import { SkeletonBox, SkeletonLine } from '../atoms/skeleton';
 import BuyMenu from './buy-menu';
+import PreloadedImage from './preloaded-image';
 
 const style = {
   container: cn(
-    'mx-w-full w-full relative',
+    'max-w-full w-60 relative',
     'grid grid-rows-[auto_repeat(4,auto)_1fr] grid-cols-[1fr_auto]'
   ),
-  image: cn('relative w-[calc(100%_-_2rem)] m-4 aspect-square ', 'col-span-2 '),
-  rating: cn('text-lg', 'absolute', 'left-[-1rem]', 'bottom-2'),
+  image: cn('relative w-[calc(100%_-_2rem)] aspect-square', 'col-span-2 ml-4'),
+  rating: cn('text-lg', 'absolute', 'left-[-1rem] bottom-2'),
   novat: cn('text-positive text-lg mt-2'),
   vat: cn('text-text-low text-sm'),
   menu: cn('row-span-2 mt-2'),
@@ -20,8 +22,12 @@ const style = {
     'col-span-2 my-4',
     'text-sm text-center text-text-low font-semibold'
   ),
-  name: cn('col-span-2', 'text-lg font-bold text-secondary mb-1 line-clamp-2'),
-  specs: cn('col-span-2 h-min ', 'text-text-low text-justify line-clamp-5 '),
+  name: cn(
+    'col-span-2 mb-1',
+    'line-clamp-2',
+    'text-lg font-bold text-secondary'
+  ),
+  specs: cn('col-span-2 h-min', 'text-text-low text-justify line-clamp-5 '),
 };
 
 export default async function GalleryProduct({
@@ -30,7 +36,6 @@ export default async function GalleryProduct({
   product: Product;
 }) {
   'use cache';
-
   const { imageUrl, spec, name, rating, availability, price } = product;
 
   const sane = sanitize(availability);
@@ -83,31 +88,22 @@ export function GalleryProductSkeleton() {
   );
 }
 
-export const story = {
-  args: {
+export const story = writeStory({
+  args: async () => ({
     skeleton: false,
     extraLongName: false,
     extraLongSpecs: false,
-  },
-  component: async ({
-    skeleton,
-    extraLongName,
-    extraLongSpecs,
-  }: {
-    skeleton: boolean;
-    extraLongName: boolean;
-    extraLongSpecs: boolean;
-  }) => {
+  }),
+
+  component({ mock, skeleton, ...mockProps }) {
     if (skeleton) return <GalleryProductSkeleton />;
 
-    const { mock } = await import('@/lib/util/mock');
+    const product = mock.makeUpProduct(mockProps);
 
     return (
-      <div className={'w-60'}>
-        <GalleryProduct
-          product={mock.makeUpProduct({ extraLongName, extraLongSpecs })}
-        />
-      </div>
+      <Suspense fallback={<GalleryProductSkeleton />}>
+        <GalleryProduct product={product} />
+      </Suspense>
     );
   },
-};
+});

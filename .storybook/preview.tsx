@@ -1,7 +1,7 @@
-import React from 'react';
 import type { Preview } from '@storybook/nextjs-vite';
-import '../src/ui/styles/global.css';
+import React, { Suspense } from 'react';
 import Providers from '../src/lib/api/providers';
+import '../src/ui/styles/global.css';
 
 const preview: Preview = {
   parameters: {
@@ -15,7 +15,9 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <Providers>
-        <Story />
+        <Suspense fallback={'Loading async component...'}>
+          <Story />
+        </Suspense>
       </Providers>
     ),
   ],

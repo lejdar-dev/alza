@@ -2,12 +2,12 @@ import {
   fetchPopularProducts,
   refreshPopularProducts,
 } from '@/lib/api/product.api';
-import { Repeat } from 'lucide-react';
-import ErrorBanner from '../atoms/error-banner';
+import { Suspense } from 'react';
 import Carousel from '../molecules/carousel';
 import PopularProduct, {
   PopularProductSkeleton,
 } from '../molecules/popular-product';
+import Retry from '../molecules/retry';
 
 export default async function Popular() {
   'use cache';
@@ -24,18 +24,13 @@ export default async function Popular() {
     );
 
   return (
-    <ErrorBanner
+    <Retry
       loadingUI={<PopularSkeleton />}
       // eslint-disable-next-line react-hooks/purity
       key={Math.random().toString()}
       retry={refreshPopularProducts}
       message={'Při komunikaci se serverem došlo k chybě.'}
-      retryMessage={
-        <>
-          <Repeat size={16} />
-          Načíst znovu
-        </>
-      }
+      retryMessage={'Načíst znovu'}
       className="h-132"
     />
   );
@@ -58,4 +53,8 @@ export function PopularSkeleton() {
   );
 }
 
-export const story = () => <Popular />;
+export const story = () => (
+  <Suspense fallback={<PopularSkeleton />}>
+    <Popular />
+  </Suspense>
+);

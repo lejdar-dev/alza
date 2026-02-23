@@ -11,16 +11,19 @@
 
 import { mkdirSync, writeFileSync } from 'fs';
 import { TurbopackOptions } from 'next/dist/server/config-shared';
+import { join, resolve } from 'path';
+
+const type_gen_dir = resolve(import.meta.dirname, '../.next/types');
 
 const evnironment = process.env.INTERFACE ?? 'production';
 
 if (!['mock', 'development', 'production'].includes(evnironment))
   throw `\n‼️  Interface for '${evnironment}' environment does not exist. Update the INTERFACE env to either mock, development or production.\n`;
 
-mkdirSync('.next/types', { recursive: true });
+mkdirSync(type_gen_dir, { recursive: true });
 
 writeFileSync(
-  `.next/types/interface.d.ts`,
+  join(type_gen_dir, `./interface.d.ts`),
   `declare module '@services' {
   export * from '@/lib/service/${evnironment}/services.${evnironment}.ts'
 }`

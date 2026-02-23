@@ -1,10 +1,10 @@
 import { fetchProducts, refreshProducts } from '@/lib/api/product.api';
 import { cn } from '@lejdar/webdev';
-import { Repeat } from 'lucide-react';
-import ErrorBanner from '../atoms/error-banner';
+import { Suspense } from 'react';
 import GalleryProduct, {
   GalleryProductSkeleton,
 } from '../molecules/gallery-product';
+import Retry from '../molecules/retry';
 
 const style = cn(
   'grid grid-cols-[repeat(auto-fit,15rem)] gap-12 justify-center max-w-full',
@@ -27,18 +27,13 @@ export default async function Gallery() {
     );
 
   return (
-    <ErrorBanner
+    <Retry
       loadingUI={<GallerySkeleton />}
       // eslint-disable-next-line react-hooks/purity
       key={Math.random().toString()}
       retry={refreshProducts}
       message={'Při komunikaci se serverem došlo k chybě.'}
-      retryMessage={
-        <>
-          <Repeat size={16} />
-          Načíst znovu
-        </>
-      }
+      retryMessage={'Načíst znovu'}
     />
   );
 }
@@ -67,4 +62,8 @@ export function GallerySkeleton() {
   );
 }
 
-export const story = () => <Gallery />;
+export const story = () => (
+  <Suspense fallback={<GallerySkeleton />}>
+    <Gallery />
+  </Suspense>
+);
